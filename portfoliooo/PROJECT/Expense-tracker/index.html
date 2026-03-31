@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Curator | Financial Dashboard</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#f7f9fb",
+              "on-secondary-container": "#00714e",
+              "tertiary-fixed": "#dae2fd",
+              "on-tertiary-fixed-variant": "#3f465c",
+              "on-tertiary-fixed": "#131b2e",
+              "secondary-fixed": "#85f8c4",
+              "secondary": "#006c4a",
+              "tertiary-container": "#535a70",
+              "surface-variant": "#e0e3e5",
+              "secondary-container": "#82f5c1",
+              "outline-variant": "#c3c6d6",
+              "on-surface-variant": "#434654",
+              "inverse-on-surface": "#eff1f3",
+              "on-primary-fixed-variant": "#0040a2",
+              "on-primary-fixed": "#001848",
+              "on-error": "#ffffff",
+              "surface-dim": "#d8dadc",
+              "surface-container": "#eceef0",
+              "surface-container-highest": "#e0e3e5",
+              "secondary-fixed-dim": "#68dba9",
+              "on-tertiary-container": "#cbd2ec",
+              "on-surface": "#191c1e",
+              "inverse-surface": "#2d3133",
+              "on-error-container": "#93000a",
+              "on-background": "#191c1e",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-tint": "#0c56d0",
+              "outline": "#737685",
+              "surface-container-lowest": "#ffffff",
+              "background": "#f7f9fb",
+              "surface-bright": "#f7f9fb",
+              "on-secondary-fixed-variant": "#005137",
+              "tertiary-fixed-dim": "#bec6e0",
+              "on-secondary": "#ffffff",
+              "primary": "#003d9b",
+              "surface-container-high": "#e6e8ea",
+              "primary-fixed": "#dae2ff",
+              "on-secondary-fixed": "#002114",
+              "inverse-primary": "#b2c5ff",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f2f4f6",
+              "on-tertiary": "#ffffff",
+              "on-primary-container": "#c4d2ff",
+              "primary-container": "#0052cc",
+              "primary-fixed-dim": "#b2c5ff",
+              "tertiary": "#3b4358"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Specific styling for the header anchor text from JSON */
+        .brand-anchor {
+            font-family: 'Manrope';
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col">
+<!-- Top Navigation Bar (Shared Component Implementation) -->
+<header class="bg-white/80 backdrop-blur-xl w-full sticky top-0 z-50 shadow-[0_8px_24px_-4px_rgba(25,28,30,0.06)]">
+<div class="flex items-center justify-between px-8 py-4 max-w-[1440px] mx-auto w-full">
+<div class="flex items-center gap-12">
+<span class="brand-anchor text-[#003d9b] text-xl">The Curator</span>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-[#003d9b] font-bold border-b-2 border-[#003d9b] pb-1 font-['Inter'] text-sm tracking-tight active:scale-95 transition-transform" href="#">Overview</a>
+<a class="text-[#434654] font-medium hover:text-[#0052CC] transition-colors duration-200 font-['Inter'] text-sm tracking-tight active:scale-95 transition-transform" href="#">Transactions</a>
+<a class="text-[#434654] font-medium hover:text-[#0052CC] transition-colors duration-200 font-['Inter'] text-sm tracking-tight active:scale-95 transition-transform" href="#">Budgets</a>
+<a class="text-[#434654] font-medium hover:text-[#0052CC] transition-colors duration-200 font-['Inter'] text-sm tracking-tight active:scale-95 transition-transform" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 w-64 transition-all" placeholder="Search insights..." type="text"/>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                    Add Expense
+                </button>
+<img alt="User profile avatar" class="w-10 h-10 rounded-full border-2 border-surface-container-high" data-alt="Close up professional portrait of a person" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdb1tQ_6JUt2M-oj2Px0pv-92yNly6ZjToWr27ppCH6QDGAmz3FmH356Tz1ol9oBhraC-IiaX-qjLRzLDIBLMGrPusQoqsdVTOLkZikodg403Ym6aK6aTDLWqi8DxfZotV8q-XhDSUe47nUNSDO_1_yc49nSnQjOg2I_nRIpX_nsXpsacCUPLONy5uc7ITEOfk-wTDtZqpeIRu7p7DqHVcx1yblU8TCDMg0PuA_wYZ5QqMG1GTNYUK7rvtb5yFoBO098JrSNamGak"/>
+</div>
+</div>
+</header>
+<main class="flex-grow max-w-[1440px] mx-auto w-full px-8 py-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Dashboard Left: Balance & Form (Bento Style) -->
+<div class="lg:col-span-5 space-y-8">
+<!-- Available Funds Card -->
+<section class="bg-white rounded-xl p-10 shadow-[0_8px_24px_-4px_rgba(25,28,30,0.06)] border border-outline-variant/15">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label text-[0.6875rem] uppercase tracking-widest font-semibold">Available Funds</span>
+<div class="bg-secondary-container/30 px-3 py-1 rounded-full flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-on-secondary-container text-xs font-bold tracking-tight">Active Balance</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2 mb-1">
+<span class="text-primary font-headline text-2xl font-bold leading-none">₹ </span>
+<h1 class="text-on-surface font-headline text-6xl font-extrabold tracking-tighter" id="balance-display">0.00</h1>
+</div>
+<p class="text-on-surface-variant text-sm mt-4 leading-relaxed max-w-[280px]">
+                        Your curated financial summary updated in real-time. Manage your wealth with precision.
+                    </p>
+</section>
+<!-- Add Transaction Form -->
+<section class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/10">
+<h2 class="font-headline text-xl text-on-surface mb-8 font-extrabold tracking-tight">New Entry</h2>
+<form class="space-y-6" id="transaction-form">
+<div>
+<label class="block text-on-surface-variant font-label text-[0.6875rem] uppercase tracking-widest font-bold mb-2">Description</label>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline/50" id="t-name" placeholder="e.g., Monthly SaaS" required="" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-on-surface-variant font-label text-[0.6875rem] uppercase tracking-widest font-bold mb-2">Amount</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-medium text-sm">₹ </span>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg pl-8 pr-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all" id="t-amount" placeholder="0.00" required="" step="0.01" type="number"/>
+</div>
+</div>
+<div>
+<label class="block text-on-surface-variant font-label text-[0.6875rem] uppercase tracking-widest font-bold mb-2">Category</label>
+<select class="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer" id="t-category">
+<option value="Food">Food</option>
+<option value="Rent">Rent</option>
+<option value="Entertainment">Entertainment</option>
+<option value="Utilities">Utilities</option>
+<option value="Other">Other</option>
+<option value="input" inputmode="text" > </option>
+</select>
+</div>
+</div>
+<button class="w-full bg-on-surface text-surface py-4 rounded-lg font-bold text-sm tracking-tight active:scale-[0.98] transition-all flex items-center justify-center gap-2 hover:bg-primary transition-colors" type="submit">
+<span class="material-symbols-outlined text-lg" data-icon="send">send</span>
+                            Log Transaction
+                        </button>
+</form>
+</section>
+</div>
+<!-- Dashboard Right: History (Editorial List) -->
+<div class="lg:col-span-7">
+<div class="flex items-end justify-between mb-8 px-4">
+<div>
+<h2 class="font-headline text-3xl font-extrabold tracking-tighter text-on-surface">Archive</h2>
+<p class="text-on-surface-variant text-sm mt-1">Detailed transaction history</p>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+</div>
+<div class="space-y-4 max-h-[700px] overflow-y-auto no-scrollbar pr-2" id="history-container">
+<!-- History items will be injected here -->
+<div class="py-20 flex flex-col items-center justify-center text-center" id="empty-state">
+<div class="w-20 h-20 rounded-full bg-surface-container-low flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl text-outline/30" data-icon="history">history</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2">No entries yet</h3>
+<p class="text-on-surface-variant text-sm max-w-xs mx-auto">Start your curation by adding a new expense entry from the left panel.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component Implementation) -->
+<footer class="bg-[#f2f4f6] w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-[1440px] mx-auto w-full gap-6">
+<div class="flex flex-col gap-2">
+<span class="font-['Manrope'] font-bold text-[#434654] text-lg">The Curator</span>
+<p class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#434654] opacity-70">© 2024 The Editorial Archive. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#434654] hover:text-[#0052CC] transition-all cursor-pointer" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#434654] hover:text-[#0052CC] transition-all cursor-pointer" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#434654] hover:text-[#0052CC] transition-all cursor-pointer" href="#">Compliance</a>
+<a class="font-['Inter'] text-[0.6875rem] uppercase tracking-widest text-[#434654] hover:text-[#0052CC] transition-all cursor-pointer" href="#">Security</a>
+</div>
+</div>
+</footer>
+<script>
+        // State Management
+       
+        let transactions = [];
+let balance = 0;
+
+// Selectors
+const form = document.getElementById('transaction-form');
+const historyContainer = document.getElementById('history-container');
+const balanceDisplay = document.getElementById('balance-display');
+const emptyState = document.getElementById('empty-state');
+
+// LocalStorage Functions
+function saveToLocalStorage() {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+}
+
+function loadFromLocalStorage() {
+    const stored = localStorage.getItem('transactions');
+    transactions = stored ? JSON.parse(stored) : [];
+}
+
+// Functions
+function updateBalance() {
+    balance = transactions.reduce((acc, curr) => acc + curr.amount, 0);
+    balanceDisplay.innerText = balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    
+    if (balance < 0) {
+        balanceDisplay.classList.add('text-error');
+        balanceDisplay.classList.remove('text-on-surface');
+    } else {
+        balanceDisplay.classList.remove('text-error');
+        balanceDisplay.classList.add('text-on-surface');
+    }
+}
+
+function renderHistory() {
+    if (transactions.length === 0) {
+        historyContainer.innerHTML = '';
+        historyContainer.appendChild(emptyState);
+        return;
+    }
+
+    historyContainer.innerHTML = '';
+    
+    const sortedTransactions = [...transactions].reverse();
+
+    sortedTransactions.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'group bg-white hover:bg-surface-container-lowest transition-all p-6 rounded-xl flex items-center justify-between border border-transparent hover:border-outline-variant/20 shadow-sm hover:shadow-md';
+        
+        const date = new Date(item.id);
+        const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+        const isExpense = item.amount < 0;
+        
+        row.innerHTML = `
+            <div class="flex items-center gap-6">
+                <div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center text-on-surface-variant">
+                     <span class="material-symbols-outlined text-xl">${getCategoryIcon(item.category)}</span>
+                </div>
+                <div>
+                    <h4 class="font-headline font-bold text-on-surface tracking-tight">${item.name}</h4>
+                    <div class="flex items-center gap-3 mt-1">
+                        <span class="font-label text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">${item.category}</span>
+                        <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+                        <span class="text-on-surface-variant text-xs font-medium">${formattedDate}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-8">
+                <span class="font-headline font-extrabold text-lg ${isExpense ? 'text-on-surface' : 'text-secondary'}">
+                    ${isExpense ? '' : '+'}${item.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </span>
+                <button onclick="deleteTransaction(${item.id})" class="opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8 rounded-full hover:bg-error-container hover:text-error flex items-center justify-center">
+                    <span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+                </button>
+            </div>
+        `;
+        historyContainer.appendChild(row);
+    });
+}
+
+function getCategoryIcon(cat) {
+    const map = {
+        'Food': 'restaurant',
+        'Rent': 'home',
+        'Entertainment': 'theater_comedy',
+        'Utilities': 'bolt',
+        'Other': 'category'
+    };
+    return map[cat] || 'payments';
+}
+
+window.deleteTransaction = function(id) {
+    transactions = transactions.filter(t => t.id !== id);
+    saveToLocalStorage(); // 👈 save after delete
+    updateBalance();
+    renderHistory();
+}
+
+// Event Listeners
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('t-name').value;
+    const amount = parseFloat(document.getElementById('t-amount').value);
+    const category = document.getElementById('t-category').value;
+
+    const finalAmount = amount;
+
+    const newTransaction = {
+        id: Date.now(),
+        name,
+        amount: finalAmount,
+        category
+    };
+
+    transactions.push(newTransaction);
+    saveToLocalStorage(); // 👈 save after adding
+    form.reset();
+    updateBalance();
+    renderHistory();
+});
+
+// Initialize — load saved data first, then render
+loadFromLocalStorage(); // 👈 restore on page load
+updateBalance();
+renderHistory();        // 👈 added so saved transactions show up on load
+    </script>
+</body></html>

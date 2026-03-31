@@ -1,0 +1,111 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+ 
+    height: 100%;
+    width: 100%;
+    background:linear-gradient(to right, rgb(0, 0, 0), rgb(255, 255, 0));
+
+
+}
+.main{
+    background:linear-gradient(to right, rgb(0, 0, 0), rgb(255, 255, 0));
+    display:flex;
+    justify-content: center;
+    align-items: center;
+      height: 100%;
+    width: 100%;
+}
+.heading{
+    align-items: center;
+    display:flex ;
+    justify-content: center;
+        
+    
+}
+h1{
+   margin: 10px;
+   justify-content: center;
+    background-color:rgb(204, 220, 220) ;
+    align-items: center;
+    display: flex;
+    border-radius: 10px;
+    font-weight: 1000p;
+    width: 250px;
+
+    
+    
+}
+.pannel{
+   
+    
+    align-items: center;
+    height: 80%;
+    width: 80%;
+    background-color: azure;
+    border-radius: 10px;
+
+    }
+    .pnltop{
+        background-color: rgb(255, 166, 0);
+        height: 100px;
+        display: flex;
+        gap: 50px;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .elem{
+        padding: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: aliceblue;
+        
+            font-weight: 600;
+    }
+    .box{
+        align-items: center;
+        display: flex ;
+
+        
+        padding: 20px 20px;
+        background-color: aliceblue;
+        color: black;
+        width: 50px;
+        height: 20px;
+        border-radius: 3px;
+        
+    }   
+    .pnlbtm{
+        width: 100%;
+        height: calc( 100% - 100px );
+        gap: 20px;
+        display: flex;
+        flex-wrap: wrap; 
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+  
+
+    .bubble{
+            cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 50px;
+        height: 50px;
+        background-color: rgb(108, 58, 155);
+        border-radius: 50%;    
+        color: azure;
+    }
+    .bubble:hover{
+        background-color: blue;
+    }
