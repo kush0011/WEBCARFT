@@ -1,0 +1,248 @@
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ── Body ──────────────────────────────────────────────────────────────────── */
+body {
+    background: #0a0a0a;
+    min-height: 100vh;                  /* ✅ FIX: was missing, caused blank screen */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px 20px;
+    font-family: "Segoe UI", Helvetica, sans-serif;
+}
+
+/* ── Wrapper ───────────────────────────────────────────────────────────────── */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* ── Title ─────────────────────────────────────────────────────────────────── */
+.title {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.title span {
+    color: #30a46c;
+}
+
+.subtitle {
+    color: #555;
+    font-size: 14px;
+    margin-top: -16px;
+}
+
+/* ── Search row ────────────────────────────────────────────────────────────── */
+.search-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.inp {
+    flex: 1;
+    padding: 14px 20px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 10px;
+    color: #ddd;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.inp:focus {
+    border-color: #30a46c;
+    color: #fff;
+}
+
+.inp::placeholder {
+    color: #444;
+}
+
+/* ── Search Button ─────────────────────────────────────────────────────────── */
+.searchBtn {
+    padding: 14px 24px;
+    background: #30a46c;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+}
+
+.searchBtn:hover {
+    background: #3dba7e;
+}
+
+.searchBtn:active {
+    transform: scale(0.97);
+}
+
+/* ── Cards container ───────────────────────────────────────────────────────── */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* ── Card ──────────────────────────────────────────────────────────────────── */
+.card {
+    position: relative;
+    width: 220px;
+    height: 320px;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 70px rgba(48, 164, 108, 0.2);
+}
+
+/* ── Profile image ─────────────────────────────────────────────────────────── */
+.bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s, filter 0.35s;
+}
+
+.card:hover .bg-img {
+    transform: scale(1.08);
+    filter: blur(2px);
+}
+
+/* ── Blurred gradient layer ────────────────────────────────────────────────── */
+.blurred-layer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+    z-index: 1;
+
+    /* Gradient mask — only shows at bottom */
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 40%, rgba(0,0,0,0));
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 40%, rgba(0,0,0,0));
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+/* ── Card content ──────────────────────────────────────────────────────────── */
+.content {
+    position: absolute;
+    bottom: 18px;
+    left: 16px;
+    right: 16px;
+    z-index: 2;
+}
+
+.content h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.handle {
+    font-size: 12px;
+    color: #30a46c;
+    margin-bottom: 5px;
+}
+
+.bio {
+    font-size: 12px;
+    color: #bbb;
+    line-height: 1.4;
+
+    /* Clamp to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ── Stats row ─────────────────────────────────────────────────────────────── */
+.stats {
+    display: flex;
+    gap: 10px;
+    margin-top: 7px;
+    font-size: 11px;
+    color: #999;
+}
+
+.stats strong {
+    color: #eee;
+}
+
+/* ── Location ──────────────────────────────────────────────────────────────── */
+.location {
+    font-size: 11px;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* ── Status messages (loading / error / empty) ─────────────────────────────── */
+.status-msg {
+    color: #555;
+    font-size: 15px;
+    text-align: center;
+    padding: 40px;
+    line-height: 1.8;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-msg small {
+    display: block;
+    color: #444;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* ── Loader spinner ─────────────────────────────────────────────────────────── */
+.loader {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #30a46c;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    flex-shrink: 0;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
